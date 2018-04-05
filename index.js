@@ -10,7 +10,7 @@ var through = require('through2'),
 
 var PLUGIN_NAME = 'gulp-include-source';
 
-var placeholders = {
+var default_placeholders = {
   'js' : '<script src="%"></script>',
   'css' : '<link rel="stylesheet" href="%">'
 };
@@ -45,6 +45,7 @@ function injectFiles(file, options) {
   var contents = file.contents.toString();
   var cwd = options.cwd || path.dirname(file.path);
   var matches = matchExpressions(contents);
+	var placeholders = options.placeholders || default_placeholders;
 
   while( matches ) {
 
